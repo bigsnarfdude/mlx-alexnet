@@ -42,8 +42,8 @@ class AlexNet(nn.Module):
 
 def alexnet(**kwargs):
   """
-  AlexNet model architecture from the
-  `"One weird trick..." <https://arxiv.org/abs/1404.5997>`_ paper.
+  AlexNet model from paper
+  `"One weird trick for parallelizing convolutional neural networks" <https://arxiv.org/abs/1404.5997>`_ paper.
   """
   model = AlexNet(**kwargs)
   return model
