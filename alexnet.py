@@ -35,14 +35,14 @@ class AlexNet(nn.Module):
 
   def __call__(self, x): # mx.array
     x = self.features(x)
-    x = torch.flatten(x, 1) # got to convert from torch to mx.array transpose?
-    # https://ml-explore.github.io/mlx/build/html/python/_autosummary/mlx.core.array.reshape.html?highlight=reshape
+    x = x.reshape(x.shape[0], -1)
     x = self.classifier(x)
     return x
 
 
 def alexnet(**kwargs):
-  r"""AlexNet model architecture from the
+  """
+  AlexNet model architecture from the
   `"One weird trick..." <https://arxiv.org/abs/1404.5997>`_ paper.
   """
   model = AlexNet(**kwargs)
