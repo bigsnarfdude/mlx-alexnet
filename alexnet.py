@@ -6,7 +6,7 @@ from max_pool import MaxPool2d
 
 class AlexNet(nn.Module):
 
-  def __init__(self, classes=100):
+  def __init__(self, classes=100, dropout = 0.5):
     super(AlexNet, self).__init__()
     self.features = nn.Sequential(
       nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1),
@@ -24,10 +24,10 @@ class AlexNet(nn.Module):
       MaxPool2d(kernel_size=3, stride=2),
     )
     self.classifier = nn.Sequential(
-      nn.Dropout(),
+      nn.Dropout(p=dropout),
       nn.Linear(256 * 1 * 1, 4096),
       nn.ReLU(),
-      nn.Dropout(),
+      nn.Dropout(p=dropout),
       nn.Linear(4096, 4096),
       nn.ReLU(),
       nn.Linear(4096, classes),
