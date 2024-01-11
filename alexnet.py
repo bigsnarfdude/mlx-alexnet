@@ -33,9 +33,9 @@ class AlexNet(nn.Module):
       nn.Linear(4096, classes),
     )
 
-  def forward(self, x): # needs to be converted to call https://ml-explore.github.io/mlx/build/html/python/nn/module.html?highlight=__call__
+  def __call__(self, x): # mx.array
     x = self.features(x)
-    x = torch.flatten(x, 1)
+    x = torch.flatten(x, 1) # got to convert from torch to mx.array transpose?
     x = self.classifier(x)
     return x
 
