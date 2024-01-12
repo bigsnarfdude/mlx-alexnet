@@ -28,25 +28,23 @@ def main():
     learning_rate = 1e-1
 
     #np.random.seed(seed)
-    trainingData = unpickle('./cifar100/train')
 
     # Load the data
-    #train_images, train_labels, test_images, test_labels = map(mx.array, mnist())
-
-    model = AlexNet()
-    print(model)
-
-    # Load the model
-    mx.eval(model.parameters())
+    trainingData = unpickle('./cifar100/train')
+    train_images = map(mx.array, trainingData['data']) # needs split 80-90 percent
+    train_labels = map(mx.array, trainingData['fine_labels']) # needs split 80-90 percent
+    #test_images, test_labels  = validation stage
+    #eval 
     #for item in trainingData:
     #    print(item, type(trainingData[item]))
     #print(trainingData['data'][0])
 
-    train_images = map(mx.array, trainingData['data']) # needs split 80-90 percent
-    train_labels = map(mx.array, trainingData['fine_labels']) # needs split 80-90 percent
-    #val
-    #eval 
+    # Load the model
+    model = AlexNet()
+    print(model)
+    mx.eval(model.parameters())
     
+
     loss_and_grad_fn = nn.value_and_grad(model, loss_fn)
     optimizer = optim.SGD(learning_rate=learning_rate)
     print(loss_and_grad_fn)
