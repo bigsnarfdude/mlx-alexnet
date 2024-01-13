@@ -1,8 +1,11 @@
+import time
 import pickle
-from alex_net import AlexNet
+
 import mlx.core as mx
 import mlx.nn as nn
 import mlx.optimizers as optim
+
+from alex_net import AlexNet
 
 
 def unpickle(file):
@@ -50,6 +53,15 @@ def main():
     print(loss_and_grad_fn)
     print(optimizer)
 
+
+    for batch in dataset:
+        loss, grad = value_and_grad_fn(model, batch)
+        optimizer.update(model, grad)
+        # Evaluate the loss and the new parameters which will
+        # run the full gradient computation and optimizer update
+        mx.eval(loss, model.parameters())
+
+    '''
     for e in range(num_epochs):
         tic = time.perf_counter()
         for X, y in batch_iterate(batch_size, train_images, train_labels):
@@ -62,5 +74,5 @@ def main():
             f"Epoch {e}: Test accuracy {accuracy.item():.3f},"
             f" Time {toc - tic:.3f} (s)"
         )
-    
+    '''
 main()
