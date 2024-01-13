@@ -8,6 +8,26 @@ import mlx.optimizers as optim
 from alex_net import AlexNet
 
 
+class AverageMeter(object):
+  """Computes and stores the average and current value"""
+
+  def __init__(self):
+    self.reset()
+
+  def reset(self):
+    self.val = 0
+    self.avg = 0
+    self.sum = 0
+    self.count = 0
+
+  def update(self, val, n=1):
+    self.val = val
+    self.sum += val * n
+    self.count += n
+    self.avg = self.sum / self.count
+
+
+
 def unpickle(file):
     with open(file, 'rb') as fo:
         myDict = pickle.load(fo, encoding='latin1')
@@ -29,6 +49,11 @@ def main():
     batch_size = 256
     num_epochs = 10
     learning_rate = 1e-1
+    batch_time = AverageMeter()
+    data_time = AverageMeter()
+    losses = AverageMeter()
+    top1 = AverageMeter()
+    top5 = AverageMeter()
 
     #np.random.seed(seed)
 
@@ -53,6 +78,18 @@ def main():
     print(loss_and_grad_fn)
     print(optimizer)
 
+    for row in range(500):
+        data = trainingData['data'][row]
+        filenames = trainingData['filenames'][row]
+        fine_labels = trainingData['fine_labels'][row]
+        coarse_labels = trainingData['coarse_labels'][row]
+
+        
+        print(data)
+        print(filenames)
+        print(fine_labels)
+        print(coarse_labels)
+        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXX')
 
     for batch in dataset:
         loss, grad = value_and_grad_fn(model, batch)
@@ -76,3 +113,4 @@ def main():
         )
     '''
 main()
+
