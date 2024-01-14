@@ -89,7 +89,7 @@ def main():
         print(filenames)
         print(fine_labels)
         print(coarse_labels)
-        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        print('<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>')
 
     for batch in dataset:
         loss, grad = value_and_grad_fn(model, batch)
