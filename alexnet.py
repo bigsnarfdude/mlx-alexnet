@@ -20,7 +20,7 @@ class AlexNet(nn.Module):
       nn.ReLU(),
       nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
       nn.ReLU(),
-      MaxPool2d(kernel_size=3, stride=2),
+      nn.MaxPool2d(kernel_size=3, stride=2),
     )
     self.classifier = nn.Sequential(
       nn.Dropout(p=dropout),
