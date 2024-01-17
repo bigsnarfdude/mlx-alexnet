@@ -1,6 +1,5 @@
 import mlx.core as mx
 import mlx.nn as nn
-from max_pool import MaxPool2d
 
 
 
@@ -11,10 +10,10 @@ class AlexNet(nn.Module):
     self.features = nn.Sequential(
       nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1),
       nn.ReLU(),
-      MaxPool2d(kernel_size=3, stride=2),
+      nn.MaxPool2d(kernel_size=3, stride=2),
       nn.Conv2d(64, 192, kernel_size=3, stride=1, padding=1),
       nn.ReLU(),
-      MaxPool2d(kernel_size=3, stride=2),
+      nn.MaxPool2d(kernel_size=3, stride=2),
       nn.Conv2d(192, 384, kernel_size=3, stride=1, padding=1),
       nn.ReLU(),
       nn.Conv2d(384, 256, kernel_size=3, stride=1, padding=1),
