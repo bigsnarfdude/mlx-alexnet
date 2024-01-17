@@ -1,5 +1,7 @@
 import mlx.core as mx
 import mlx.nn as nn
+# missing         x = self.avgpool(x) from mimm.layers.adaptive_average_pooling import AdaptiveAveragePool2D
+
 
 
 
