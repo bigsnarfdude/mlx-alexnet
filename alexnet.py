@@ -5,7 +5,7 @@ import mlx.nn as nn
 
 class AlexNet(nn.Module):
 
-  def __init__(self, classes=100, dropout=0.5):
+  def __init__(self, classes=10, dropout=0.5):
     super(AlexNet, self).__init__()
     self.features = nn.Sequential(
       nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1),
