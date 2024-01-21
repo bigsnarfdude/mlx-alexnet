@@ -1,8 +1,6 @@
 import mlx.core as mx
 import mlx.nn as nn
-# missing         x = self.avgpool(x) from mimm.layers.adaptive_average_pooling import AdaptiveAveragePool2D
-# https://pytorch.org/docs/stable/generated/torch.nn.AdaptiveAvgPool2d.html
-
+from max_pool import MaxPool2d
 
 
 class AlexNet(nn.Module):
@@ -10,19 +8,19 @@ class AlexNet(nn.Module):
   def __init__(self, classes=10, dropout=0.5):
     super(AlexNet, self).__init__()
     self.features = nn.Sequential(
-      nn.Conv2d(3, 64, kernel_size=3, stride=2, padding=1),
+      nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1, bias=False),
       nn.ReLU(),
-      nn.MaxPool2d(kernel_size=3, stride=2),
-      nn.Conv2d(64, 192, kernel_size=3, stride=1, padding=1),
+      MaxPool2d(kernel_size=3, stride=2),
+      nn.Conv2d(64, 192, kernel_size=3, stride=1, padding=1, bias=False),
       nn.ReLU(),
-      nn.MaxPool2d(kernel_size=3, stride=2),
-      nn.Conv2d(192, 384, kernel_size=3, stride=1, padding=1),
+      MaxPool2d(kernel_size=3, stride=2),
+      nn.Conv2d(192, 384, kernel_size=3, stride=1, padding=1, bias=False),
       nn.ReLU(),
-      nn.Conv2d(384, 256, kernel_size=3, stride=1, padding=1),
+      nn.Conv2d(384, 256, kernel_size=3, stride=1, padding=1, bias=False),
       nn.ReLU(),
-      nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1),
+      nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1, bias=False),
       nn.ReLU(),
-      nn.MaxPool2d(kernel_size=3, stride=2),
+      MaxPool2d(kernel_size=3, stride=2),
     )
     self.classifier = nn.Sequential(
       nn.Dropout(p=dropout),
